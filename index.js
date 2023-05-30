@@ -1,17 +1,30 @@
 //Final Solution and Runtime: O(n)
 function hasTargetSum(array, target) {
-  const seenNumbers = {};
+  const seenNumbers = new Set();
 
   for (const number of array) {
     const complement = target - number;
-    if (seenNumbers[complement]) return true;
-    seenNumbers[number] = true;
+    if (seenNumbers.has(complement)) return true;
+    seenNumbers.add(number);
   }
 
   return false;
 }
 
-//Practice Solution and Runtime: O(n²)
+//Refactor Solution
+// function hasTargetSum(array, target) {
+//   const seenNumbers = {};
+
+//   for (const number of array) {
+//     const complement = target - number;
+//     if (seenNumbers[complement]) return true;
+//     seenNumbers[number] = true;
+//   }
+
+//   return false;
+// }
+
+//Refactor Solution and Runtime: O(n²)
 // function hasTargetSum(array, target) {
 //   const seenNumbers = {};
 //   for (let i = 0; i < array.length; i++){
@@ -26,7 +39,7 @@ function hasTargetSum(array, target) {
 //   return false;
 // }
 
-//Practice Solution and Runtime: O(n²)
+//First Solution and Runtime: O(n²)
 // function hasTargetSum(array, target) {
 //   for (let i = 0; i < array.length; i++){
 //     const complement = target - array[i];
@@ -42,22 +55,23 @@ function hasTargetSum(array, target) {
 /* 
   Write the Big O time complexity of your function here
   Final solution runtime: O(n)
+  Space: O(n)
 */
 
 /* 
   Add your pseudocode here
-  Create an object to keep track of our numbers we've already seen.
+  Create an empty set track of our numbers we've already seen.
   Iterate through each number in the array.
   For the current number, identify a complement that adds to the target (complement = target - number).
-  Check if any key in our object is our complement.
+  Check if any number in the set of the object is our complement to the current number.
   If so, return true.
-  Otherwise add that number to the object.
-  If I reach the end of the array and I haven't found two numbers that add up to my target, return false.
+  Otherwise add that current number to the set of our object so we can check it later against other numbers.
+  If we reach the end of the array and we haven't found two numbers that add up to my target, return false.
 */
 
 /*
   Add written explanation of your solution here
-  This final solution is a function called hasTargetSum that takes an array and a target as the arguments. It first creates an empty object to store seen numbers. It iterate through the array and looks for a complement number. If the number or key in our object is a complement, return true. If none checks out to be a complement, return true.
+  This final solution is a function called hasTargetSum that takes an array and a target as the arguments. It first creates an empty set of object to store seen numbers. It iterate through the array and looks for a complement number. If the number or set in our object is a complement, return true. If the number does not check out to be a complement, add it to the set. If at the end, no number is a complement, return false.
 */
 
 // You can run `node index.js` to view these console logs
